@@ -6,13 +6,23 @@ import { NotfoundComponent } from './components/notfound/notfound.component';
 import { RoominfoComponent } from './components/roominfo/roominfo.component';
 import { LostpassComponent } from './components/lostpass/lostpass.component';
 import { LogoutComponent } from './components/logout/logout.component';
+import { BookingsComponent } from './components/bookings/bookings.component';
+import { ManageBookingsComponent } from './components/manage-bookings/manage-bookings.component';
+import { ManageRoomsComponent } from './components/manage-rooms/manage-rooms.component';
 
 export const routes: Routes = [
+
+  /*
+    Komment hogy áttekinthetőbb legyen
+  */
+
+  //logged out
+  
   {
     path: 'login', component: LoginComponent
   },
   {
-    path: 'logout', component: LogoutComponent
+    path: 'rooms', component: RoomsComponent
   },
   {
     path: 'registration', component: RegistrationComponent
@@ -21,11 +31,35 @@ export const routes: Routes = [
     path: 'lostpass', component: LostpassComponent
   },
   {
-    path: 'rooms', component: RoomsComponent
-  },
-  {
     path: 'rooms/:id', component: RoominfoComponent
   },
+
+  //logged in
+
+  {
+    path: 'logout', component: LogoutComponent
+  },
+
+  //user
+  {
+    path: 'bookings', component: BookingsComponent
+  },
+
+  //admin
+  {
+    path: 'admin',
+    children:[
+      {
+        path: 'rooms', component: ManageRoomsComponent
+      },
+      {
+        path: 'bookings', component: ManageBookingsComponent
+      },
+    ]
+  },
+
+  //összestöbbi
+
   {
     path: '', redirectTo: 'rooms', pathMatch: 'full'
   },
