@@ -29,8 +29,15 @@ export class NavbarComponent implements OnInit{
     this.items = [
       { label: "Szállások", url: '/rooms' },
       ...(isLoggedIn) ? [
-        { label: "Foglalásaim", url: '/bookings' },
-        { label: "Kilépés", url: '/logout' }
+        ...(this.auth.isAdmin()) ? [
+          { label: "Szállások kezelése", url: '/admin/room' },
+          { label: "Foglalások kezelése", url: '/admin/bookings' },
+          { label: "Felhasználók kezelése", url: '/admin/users' },
+          { label: "Kilépés", url: '/logout' }
+        ] : [
+          { label: "Foglalásaim", url: '/bookings' },
+          { label: "Kilépés", url: '/logout' }
+        ]
       ] : [
         { label: "Belépés", url: '/login' },
         { label: "Regisztráció", url: '/registration'}
